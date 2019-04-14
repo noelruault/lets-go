@@ -15,7 +15,7 @@ func (app *App) Home(w http.ResponseWriter, r *http.Request) {
 		app.ServerError(w, err)
 		return
 	}
-	// Pass the slice of snippets to the "home.page.html" templates.
+	// Pass the slice of snippets to the "homepage.html" templates.
 	// Include the *http.Request parameter.
 	app.RenderHTML(w, r, "homepage.html", &HTMLData{
 		Snippets: snippets,
@@ -40,11 +40,18 @@ func (app *App) ShowSnippet(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Render the showpage.html template, passing in the snippet data wrapped in
-	// our HTMLData struct.
-	// Include the *http.Request parameter.
+	session := app.Sessions.Load(r)
+	flash, err := session.PopString(w, "flash") // PopString will delete flash after reading
+	if err != nil {
+		app.ServerError(w, err)
+		return
+	}
 
+	// Render the showpage.html template, passing in the snippet data
+	// wrapped in our HTMLData struct.
+	// Include the *http.Request parameter. (r)
 	app.RenderHTML(w, r, "showpage.html", &HTMLData{
+		Flash:   flash, // Pass the flash message to the template.
 		Snippet: snippet,
 	})
 }
@@ -54,7 +61,8 @@ func (app *App) NewSnippet(w http.ResponseWriter, r *http.Request) {
 	// it's empty, it won't contain any previously submitted data or validation
 	// failure messages.
 	app.RenderHTML(w, r, "newpage.html", &HTMLData{
-		Form: &forms.NewSnippet{}})
+		Form: &forms.NewSnippet{},
+	})
 }
 
 func (app *App) CreateSnippet(w http.ResponseWriter, r *http.Request) {
@@ -88,6 +96,14 @@ func (app *App) CreateSnippet(w http.ResponseWriter, r *http.Request) {
 		app.ServerError(w, err)
 		return
 	}
+	session := app.Sessions.Load(r)
+	err = session.PutString(w, "flash", "Your snippet was saved successfully!")
+	// ...other methods than PutString: https://godoc.org/github.com/alexedwards/scs#pkg-index
+	if err != nil {
+		app.ServerError(w, err)
+		return
+	}
+
 	// If successful, send a 303 See Other response redirecting the user to the
 	// page with their new snippet.
 	http.Redirect(w, r, fmt.Sprintf("/snippet/%d", id), http.StatusSeeOther)

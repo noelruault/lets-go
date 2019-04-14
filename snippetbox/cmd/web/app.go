@@ -1,7 +1,8 @@
 package main
 
 import (
-	"github.com/noelruault/lets-go/snippetbox/pkg/models" // New import
+	"github.com/alexedwards/scs"
+	"github.com/noelruault/lets-go/snippetbox/pkg/models"
 )
 
 // Define an App struct to hold the application-wide dependencies and configuration
@@ -11,5 +12,6 @@ import (
 type App struct {
 	Database  *models.Database
 	HTMLDir   string
+	Sessions  *scs.Manager
 	StaticDir string
 }
