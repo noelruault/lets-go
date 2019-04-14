@@ -1,9 +1,6 @@
 {{define "page-title"}}Snippet #{{.Snippet.ID}}{{end}}
 
 {{define "page-body"}}
-<!-- Start deliberate error. -->
-{{len nil}}
-<!-- End deliberate error -->
 {{with .Snippet}}
 <div class="snippet">
     <div class="metadata">

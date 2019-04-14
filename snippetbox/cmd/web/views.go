@@ -13,13 +13,14 @@ import (
 // Create a humanDate function which returns a nicely formated string
 // representation of a time.Time object.
 func humanDate(t time.Time) string {
-	return t.Format("02 Jan 2006 at 15:04")
+	return t.Format("02 Jan 2006 at 15:04") // https://golang.org/pkg/time/#Time.Format
 }
 
 // Define a new HTMLData struct to act as a wrapper for the dynamic data we want
 // to pass to our templates. For now this just contains the snippet data that we
 // want to display, which has the underling type *models.Snippet.
 type HTMLData struct {
+	Form     interface{}
 	Path     string
 	Snippet  *models.Snippet
 	Snippets []*models.Snippet

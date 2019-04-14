@@ -1,19 +1,14 @@
 package main
 
 import (
-	"net/http" // Debug purposes
+	"fmt"
+	"net/http"
 	"strconv"
+
+	"github.com/noelruault/lets-go/snippetbox/pkg/forms"
 )
 
 func (app *App) Home(w http.ResponseWriter, r *http.Request) {
-	if r.URL.Path != "/" {
-		app.NotFound(w)
-		return
-	}
-
-	// fmt.Printf("[DEBUG]: app.HTMLDir = " + app.HTMLDir + "\n") // Renders path to file
-	// app.RenderHTML(w, "homepage.html", nil) // Use the app.RenderHTML() helper.
-
 	// Fetch a slice of the latest snippets from the database.
 	snippets, err := app.Database.LatestSnippets()
 	if err != nil {
@@ -28,7 +23,9 @@ func (app *App) Home(w http.ResponseWriter, r *http.Request) {
 }
 
 func (app *App) ShowSnippet(w http.ResponseWriter, r *http.Request) {
-	id, err := strconv.Atoi(r.URL.Query().Get("id"))
+	// Pat doesn't strip the colon from the named capture key, so we need to
+	// get the value of ":id" from the query string instead of "id".
+	id, err := strconv.Atoi(r.URL.Query().Get(":id"))
 	if err != nil || id < 1 {
 		app.NotFound(w)
 		return
@@ -42,14 +39,56 @@ func (app *App) ShowSnippet(w http.ResponseWriter, r *http.Request) {
 		app.NotFound(w)
 		return
 	}
+
 	// Render the showpage.html template, passing in the snippet data wrapped in
 	// our HTMLData struct.
 	// Include the *http.Request parameter.
-	app.RenderHTML(w, r, "homepage.html", &HTMLData{
+
+	app.RenderHTML(w, r, "showpage.html", &HTMLData{
 		Snippet: snippet,
 	})
 }
 
 func (app *App) NewSnippet(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("Display the new snippet form..."))
+	// Pass an empty *forms.NewSnippet object to the newpage.html template. Because
+	// it's empty, it won't contain any previously submitted data or validation
+	// failure messages.
+	app.RenderHTML(w, r, "newpage.html", &HTMLData{
+		Form: &forms.NewSnippet{}})
+}
+
+func (app *App) CreateSnippet(w http.ResponseWriter, r *http.Request) {
+	// First we call r.ParseForm() which adds any POST (also PUT and PATCH) data
+	// to the r.PostForm map. If there are any errors we use our
+	// app.ClientError helper to send a 400 Bad Request response to the user.
+	err := r.ParseForm()
+	if err != nil {
+		app.ClientError(w, http.StatusBadRequest)
+		return
+	}
+	// We initialize a *forms.NewSnippet object and use the r.PostForm.Get() method
+	// to assign the data to the relevant fields.
+	form := &forms.NewSnippet{
+		Title:   r.PostForm.Get("title"),
+		Content: r.PostForm.Get("content"),
+		Expires: r.PostForm.Get("expires"),
+	}
+	// Check if the form passes the validation checks. If not, then use the
+	// fmt.Fprint function to dump the failure messages to the response body.
+	if !form.Valid() {
+		// fmt.Fprint(w, form.Failures) // Will break the page. Rendering raw html.
+		app.RenderHTML(w, r, "newpage.html", &HTMLData{Form: form})
+		return
+	}
+	// If the validation checks have been passed, call our database model's
+	// InsertSnippet() method to create a new database record and return it's ID
+	// value.
+	id, err := app.Database.InsertSnippet(form.Title, form.Content, form.Expires)
+	if err != nil {
+		app.ServerError(w, err)
+		return
+	}
+	// If successful, send a 303 See Other response redirecting the user to the
+	// page with their new snippet.
+	http.Redirect(w, r, fmt.Sprintf("/snippet/%d", id), http.StatusSeeOther)
 }
