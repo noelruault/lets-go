@@ -4,7 +4,6 @@ import (
 	"database/sql"
 	"flag"
 	"log"
-	"net/http"
 	"time"
 
 	"github.com/alexedwards/scs"
@@ -44,19 +43,25 @@ func main() {
 	// ... other methods: https://godoc.org/github.com/alexedwards/scs#pkg-index
 
 	app := &App{
+		Addr: *addr,
 		// Pass in the connection pool when initializing the models.Database object.
-		Database:  &models.Database{db}, // {}
+		Database:  &models.Database{db},
 		HTMLDir:   *htmlDir,
 		Sessions:  sessionManager,
 		StaticDir: *staticDir,
+		TLSCert:   *tlsCert,
+		TLSKey:    *tlsKey,
 	}
 
 	// Pass the app.Routes() method (which returns a serve mux) to the
 	// http.ListenAndServe() function.
 	log.Printf("Starting server on %s", *addr)
 	// err := http.ListenAndServe(*addr, app.Routes())
-	err := http.ListenAndServeTLS(*addr, *tlsCert, *tlsKey, app.Routes()) // Start the HTTPS server.
-	log.Fatal(err)
+	// err := http.ListenAndServeTLS(*addr, *tlsCert, *tlsKey, app.Routes()) // Start the HTTPS server.
+	// log.Fatal(err)
+
+	// Call the new RunServer() method to start the server.
+	app.RunServer()
 }
 
 // The connect() function wraps sql.Open() and returns a sql.DB connection pool
