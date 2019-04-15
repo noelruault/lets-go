@@ -7,6 +7,7 @@ import (
 	"path/filepath"
 	"time"
 
+	"github.com/justinas/nosurf"
 	"github.com/noelruault/lets-go/snippetbox/pkg/models"
 )
 
@@ -20,12 +21,13 @@ func humanDate(t time.Time) string {
 // to pass to our templates. For now this just contains the snippet data that we
 // want to display, which has the underling type *models.Snippet.
 type HTMLData struct {
-	Flash    string
-	Form     interface{}
-	LoggedIn bool
-	Path     string
-	Snippet  *models.Snippet
-	Snippets []*models.Snippet
+	CSRFToken string
+	Flash     string
+	Form      interface{}
+	LoggedIn  bool
+	Path      string
+	Snippet   *models.Snippet
+	Snippets  []*models.Snippet
 }
 
 func (app *App) RenderHTML(
@@ -36,6 +38,9 @@ func (app *App) RenderHTML(
 	}
 	// Add the current request URL path to the data.
 	data.Path = r.URL.Path
+
+	// Always add the CSRF token to the data for our templates.
+	data.CSRFToken = nosurf.Token(r)
 
 	// Add the logged in status to the HTMLData.
 	var err error
@@ -69,7 +74,6 @@ func (app *App) RenderHTML(
 	}
 
 	buf := new(bytes.Buffer)
-
 	// Write the template to the buffer, instead of straight to the
 	// http.ResponseWriter. If there's an error, call our error handler and then
 	// return.

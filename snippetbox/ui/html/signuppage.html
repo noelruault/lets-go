@@ -1,6 +1,9 @@
 {{define "page-title"}}Signup{{end}}
 {{define "page-body"}}
-<form action="/user/signup" method="POST" novalidate> {{with .Form}}
+<form action="/user/signup" method="POST" novalidate>
+    <!-- Add a hidden input containing the CSRF token -->
+    <input type="hidden" name="csrf_token" value="{{.CSRFToken}}">
+    {{with .Form}}
     <div>
         <label>Name:</label> {{with .Failures.Name}}
         <label class="error">{{.}}</label> {{end}}

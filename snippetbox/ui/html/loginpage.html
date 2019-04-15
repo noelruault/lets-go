@@ -3,6 +3,8 @@
 <div class="flash">{{.}}</div>
 {{end}}
 <form action="/user/login" method="POST" novalidate>
+    <!-- Add a hidden input containing the CSRF token -->
+    <input type="hidden" name="csrf_token" value="{{.CSRFToken}}">
     {{with .Form}}
     {{with .Failures.Generic}}
     <div class="error">{{.}}</div>

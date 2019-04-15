@@ -1,6 +1,9 @@
 {{define "page-title"}}Add a New Snippet{{end}}
 {{define "page-body"}}
-<form action="/snippet/new" method="POST"> {{with .Form}}
+<form action="/snippet/new" method="POST">
+    <!-- Add a hidden input containing the CSRF token -->
+    <input type="hidden" name="csrf_token" value="{{.CSRFToken}}">
+    {{with .Form}}
     <div>
         <label>Title:</label> {{with .Failures.Title}}
         <label class="error">{{.}}</label> {{end}}
