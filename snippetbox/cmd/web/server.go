@@ -20,6 +20,7 @@ func (app *App) RunServer() {
 		Addr:      app.Addr,
 		Handler:   app.Routes(),
 		TLSConfig: tlsConfig,
+
 		// Fix vulnerability to slow-client atacks
 		IdleTimeout:  time.Minute,
 		ReadTimeout:  5 * time.Second,

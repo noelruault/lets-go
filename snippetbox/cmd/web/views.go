@@ -22,6 +22,7 @@ func humanDate(t time.Time) string {
 type HTMLData struct {
 	Flash    string
 	Form     interface{}
+	LoggedIn bool
 	Path     string
 	Snippet  *models.Snippet
 	Snippets []*models.Snippet
@@ -35,6 +36,14 @@ func (app *App) RenderHTML(
 	}
 	// Add the current request URL path to the data.
 	data.Path = r.URL.Path
+
+	// Add the logged in status to the HTMLData.
+	var err error
+	data.LoggedIn, err = app.LoggedIn(r)
+	if err != nil {
+		app.ServerError(w, err)
+		return
+	}
 
 	files := []string{
 		filepath.Join(app.HTMLDir, "base.html"),

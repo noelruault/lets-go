@@ -55,7 +55,6 @@ func main() {
 
 	// Pass the app.Routes() method (which returns a serve mux) to the
 	// http.ListenAndServe() function.
-	log.Printf("Starting server on %s", *addr)
 	// err := http.ListenAndServe(*addr, app.Routes())
 	// err := http.ListenAndServeTLS(*addr, *tlsCert, *tlsKey, app.Routes()) // Start the HTTPS server.
 	// log.Fatal(err)
