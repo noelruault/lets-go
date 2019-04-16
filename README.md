@@ -1,3 +1,4 @@
+0. [Good Practices](#good-practices)
 1. [Organization and structure for a project](#organization-and-structure-for-a-project)
 2. [Foundations](#foundations)
 
@@ -19,6 +20,12 @@
 5. [Dynamic HTML Templates](#dynamic-html-templates)
 6. [RESTful Routing](#restful-routing)
 7. [Processing Forms](#processing-forms)
+8. [Testing](#Testing)
+
+# Good practices
+
+https://golang.org/doc/code.html
+https://golang.org/doc/effective_go.html
 
 # Organization and structure for a project
 
@@ -41,17 +48,17 @@ Therefore, the organization of a finished project should be similar to the follo
 │       ├── middleware.go
 │       ├── routes.go
 │       ├── server.go
-│       └── views.go
-│
-├── test
-│   └── *  // https://github.com/golang-standards/project-layout
+│       ├── views.go
+│       └── test_*.go
 │
 ├── pkg
 │   ├── forms
-│   │   └── forms.go
+│   │   ├── forms.go
+│   │   └── test_*.go
 │   └── models
 │       ├── database.go
-│       └── models.go
+│       ├── models.go
+│       └── test_*.go
 │
 ├── tls
 │   ├── cert.pem    // Only development environment.
@@ -1377,3 +1384,12 @@ func (app *App) CreateSnippet(w http.ResponseWriter, r *http.Request) { err := r
 ```
 
 </details>
+
+# Testing
+
+https://golang.org/doc/code.html#Testing
+https://golang.org/pkg/testing/
+
+[TUTORIAL]: https://www.calhoun.io/how-to-test-with-go/
+
+** Useful Asserts library: https://github.com/stretchr/testify
