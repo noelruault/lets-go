@@ -1,0 +1,20 @@
+# Binaries for programs and plugins
+*.dll
+
+# Output of the go coverage tool, specifically when used with LiteIDE
+*.out
+
+# General
+.DS_Store
+
+# Thumbnails
+._*
+
+# Files that might appear in the root of a volume
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+
+# vscode
+.vscode/
