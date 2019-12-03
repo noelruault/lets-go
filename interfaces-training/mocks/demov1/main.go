@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 
-	stripe "github.com/noelruault/interfaces-training/mocks/v1"
+	stripe "github.com/noelruault/programming-training/interfaces-training/mocks/v1"
 )
 
 // Running this main, will hit the real (testing) stripe end-point.

@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"testing"
 
-	stripe "github.com/noelruault/interfaces-training/mocks/v2"
+	stripe "github.com/noelruault/programming-training/interfaces-training/mocks/v2"
 )
 
 type App struct {
@@ -14,7 +14,6 @@ type App struct {
 
 func (a *App) Run() {}
 
-// MOCK CLIENT
 func TestApp(t *testing.T) {
 	client, mux, teardown := stripe.TestClient(t)
 	defer teardown()
@@ -31,7 +30,7 @@ func TestApp(t *testing.T) {
 	}
 	app.Run()
 
-	charge, err := client.Charge(123, "doesnt_matter", "something else")
+	charge, err := app.Stripe.Charge(123, "doesnt_matter", "something else")
 	if err != nil {
 		t.Errorf("Charge() err = %s; want nil", err)
 	}

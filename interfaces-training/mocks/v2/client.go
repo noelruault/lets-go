@@ -35,7 +35,9 @@ func (c *Client) Charge(amount int, source, desc string) (*Charge, error) {
 	v.Set("currency", "usd")
 	v.Set("source", source)
 	v.Set("description", desc)
-	req, err := http.NewRequest(http.MethodPost, c.BaseURL()+"/v1/charges", strings.NewReader(v.Encode()))
+
+	req, err := http.NewRequest(
+		http.MethodPost, c.BaseURL()+"/v1/charges", strings.NewReader(v.Encode()))
 	if err != nil {
 		return nil, err
 	}
@@ -45,15 +47,18 @@ func (c *Client) Charge(amount int, source, desc string) (*Charge, error) {
 	if err != nil {
 		return nil, err
 	}
+
 	defer res.Body.Close()
 	resBytes, err := ioutil.ReadAll(res.Body)
 	if err != nil {
 		return nil, err
 	}
+
 	var charge Charge
 	err = json.Unmarshal(resBytes, &charge)
 	if err != nil {
 		return nil, err
 	}
+
 	return &charge, nil
 }

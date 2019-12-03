@@ -5,10 +5,9 @@ import (
 	"net/http"
 	"testing"
 
-	stripe "github.com/noelruault/interfaces-training/mocks/v2"
+	stripe "github.com/noelruault/programming-training/interfaces-training/mocks/v2"
 )
 
-// MOCK SERVER
 func TestAppV2(t *testing.T) {
 	client, mux, teardown := stripe.TestClient(t)
 	defer teardown()

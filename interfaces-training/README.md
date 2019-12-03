@@ -1,4 +1,17 @@
-# Learning Golang Interfaces
+
+0. [Learning about Golang Interfaces, DI and mocking](#learning-golang-interfaces)
+1. [Structs and Interfaces](#structs-and-interfaces)
+2. [Dependency injection](#dependency-injection)
+3. [Mocks](#mocks)
+
+    31. [Mocks: Faking API's](#mocks-faking-apis)
+
+        311. [1. Replacing the server](#1-replacing-the-server)
+        312. [2. Replacing the client](#2-replacing-the-client)
+
+# Learning about Golang Interfaces, dependency injection and mocking
+
+Short code-guide to refresh useful stuff about interfaces, dependency injection and mocking.
 
 ## Structs and Interfaces
 
@@ -14,7 +27,19 @@ Go's build-in data types. A type that contains named fields can be defined with 
     }
 ```
 
-With an special type of function known as methods we can use receivers, for different structs to define functionality specific to each type. We no longer need the `&` operator (Go automatically knows to pass a pointer to the circle for this method), and because this function can only be used with specific types such as Circle or Rectangle, we can rename the function to just `area`
+Although we can implement a first version of "calculating area functions" like next:
+
+```go
+    func circleArea(radius, diagonal float64) float64 {
+        return math.Pi * radius * radius
+    }
+
+    func rectangleArea(length, width float64) float64 {
+        return length * width
+    }
+```
+
+We can improve it with an special type of function known as methods. We can use receivers, for different structs to define functionality specific to each type. We no longer need the `&` operator (Go automatically knows to pass a pointer to the circle for this method), and because this function can only be used with specific types such as Circle or Rectangle, we can rename the function to just `area`
 
 ```go
     func (c *Circle) area() float64 {
@@ -113,7 +138,7 @@ In Go, **Interfaces define functionality rather than data** so interfaces can al
 Now a MultiShape can contain any figure.
 Interfaces are perticulary useful as software projects grow and become more complex. They allow us to hide the incidental details of implementation (e.g. the fields of our struct), which makes it easeier to reason about software components in isolation.
 
-That can be applied to this example because as long as the area  methods we defined continue to produce the same results, we
+That can be applied to this example because as long as the area methods we defined continue to produce the same results, we are free to change how a Circle or Rectangle is structured without having to worry about the correct functionality of the totalArea function.
 
 ## Dependency injection
 
@@ -156,7 +181,7 @@ The best way to solve this is by using Dependency Injection.
     var execCommand = exec.Command
 
     func Version() string {
-        cmd := exec.Command("git", "version")
+        cmd := execCommand("git", "version")
         stdout, err := cmd.Output()
         if err != nil {
             panic(err)
@@ -436,7 +461,7 @@ We can mock this in two different ways:
         "net/http"
         "testing"
 
-        stripe "github.com/noelruault/interfaces-training/mocks/v2"
+        stripe "github.com/noelruault/programming-training/interfaces-training/mocks/v2"
     )
 
     func TestAppV2(t *testing.T) {
@@ -470,7 +495,7 @@ With this option, we are injecting a client that has a base URL that communicate
         "net/http"
         "testing"
 
-        stripe "github.com/noelruault/interfaces-training/mocks/v2"
+        stripe "github.com/noelruault/programming-training/interfaces-training/mocks/v2"
     )
 
     type App struct {
@@ -495,7 +520,7 @@ With this option, we are injecting a client that has a base URL that communicate
         }
         app.Run()
 
-        charge, err := client.Charge(123, "doesnt_matter", "something else")
+        charge, err := app.Stripe.Charge(123, "doesnt_matter", "something else")
         if err != nil {
             t.Errorf("Charge() err = %s; want nil", err)
         }

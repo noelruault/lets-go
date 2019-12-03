@@ -23,8 +23,12 @@ func distance(x1, y1, x2, y2 float64) float64 {
 	return math.Sqrt(a*a + b*b)
 }
 
-func circleArea(c *Circle) float64 {
-	return math.Pi * c.radius * c.radius
+func circleArea(radius, diagonal float64) float64 {
+	return math.Pi * radius * radius
+}
+
+func rectangleArea(length, width float64) float64 {
+	return length * width
 }
 
 func weirdRectangleArea(x1, y1, x2, y2 float64) float64 {
@@ -92,7 +96,7 @@ func main() {
 	fmt.Println(weirdRectangleArea(wr.x1, wr.y1, wr.x2, wr.y2))
 
 	c = Circle{5, 0}
-	fmt.Println(circleArea(&c)) // Go automatically knows to pass a pointer
+	fmt.Println(circleArea(c.radius, c.diagonal))
 
 	c = Circle{5, 0}
 	fmt.Println(c.area())
