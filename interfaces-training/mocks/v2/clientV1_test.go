@@ -8,7 +8,7 @@ import (
 	stripe "github.com/noelruault/programming-training/interfaces-training/mocks/v2"
 )
 
-func TestAppV2(t *testing.T) {
+func TestAppV1(t *testing.T) {
 	client, mux, teardown := stripe.TestClient(t)
 	defer teardown()
 

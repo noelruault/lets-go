@@ -24,7 +24,6 @@ type httpClient interface {
 type Client struct {
 	Key     string
 	baseURL string
-	httpCli httpClient
 }
 
 func (c *Client) BaseURL() string {
@@ -50,7 +49,7 @@ func (c *Client) Charge(cli httpClient, amount int, source, desc string) (*Charg
 
 	req.SetBasicAuth(c.Key, "")
 	// var client http.Client
-	res, err := c.httpCli.Do(req)
+	res, err := cli.Do(req)
 	if err != nil {
 		return nil, err
 	}

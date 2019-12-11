@@ -6,11 +6,12 @@ import (
 )
 
 type StripeClientMock struct {
+	c   *Charge
 	err error
 }
 
 func (scm *StripeClientMock) Charge(amount int, source, desc string) (*Charge, error) {
-	return nil, scm.err
+	return scm.c, scm.err
 }
 
 func TestApp_Run(t *testing.T) {
@@ -23,8 +24,10 @@ func TestApp_Run(t *testing.T) {
 		wantErr bool
 	}{
 		{
-			name:    "test1",
-			fields:  fields{sc: &StripeClientMock{}},
+			name: "test1",
+			fields: fields{sc: &StripeClientMock{
+				c: &Charge{},
+			}},
 			wantErr: false,
 		},
 		{

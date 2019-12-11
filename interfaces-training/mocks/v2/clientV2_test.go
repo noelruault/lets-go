@@ -14,7 +14,7 @@ type App struct {
 
 func (a *App) Run() {}
 
-func TestApp(t *testing.T) {
+func TestAppV2(t *testing.T) {
 	client, mux, teardown := stripe.TestClient(t)
 	defer teardown()
 
@@ -28,7 +28,7 @@ func TestApp(t *testing.T) {
 	app := App{
 		Stripe: client,
 	}
-	app.Run()
+	// app.Run()
 
 	charge, err := app.Stripe.Charge(123, "doesnt_matter", "something else")
 	if err != nil {

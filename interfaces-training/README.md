@@ -1,4 +1,3 @@
-
 0. [Learning about Golang Interfaces, DI and mocking](#learning-golang-interfaces)
 1. [Structs and Interfaces](#structs-and-interfaces)
 2. [Dependency injection](#dependency-injection)
@@ -448,10 +447,10 @@ So we can create a "fake client", like this one:
 ```
 
 We can mock this in two different ways:
-    1. Use the client but replace the server is communicating with.
-    2. Replace the client we are communicating with.
+    1. Replace the client we are communicating with.
+    2. Use the client but replace the server is communicating with.
 
-#### 1. Replacing the server
+#### 1. Replacing the client (1)
 
 ```go
     package stripe_test
@@ -483,7 +482,7 @@ We can mock this in two different ways:
     }
 ```
 
-#### 2. Replacing the client
+#### 2. Replacing the client (2)
 
 With this option, we are injecting a client that has a base URL that communicates with a local server that we have control over. This approach allows us to write end to end tests and they will like as if all the application were running from start to end.
 
