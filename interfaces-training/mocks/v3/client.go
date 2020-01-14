@@ -48,9 +48,6 @@ func (a *App) Run() error {
 	return nil
 }
 
-// Mocking the http.client would be like this:
-// func (c *Client) Charge(cli httpClient, amount int, source, desc string) (*Charge, error) {
-// or might come inside of *Client
 func (c *Client) Charge(amount int, source, desc string) (*Charge, error) {
 	v := url.Values{}
 	v.Set("amount", strconv.Itoa(amount))

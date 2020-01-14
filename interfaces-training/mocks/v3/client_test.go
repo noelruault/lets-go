@@ -15,31 +15,30 @@ func (scm *StripeClientMock) Charge(amount int, source, desc string) (*Charge, e
 }
 
 func TestApp_Run(t *testing.T) {
-	type fields struct {
-		sc StripeClient
-	}
 	tests := []struct {
 		name    string
-		fields  fields
+		client  StripeClient
 		wantErr bool
 	}{
 		{
 			name: "test1",
-			fields: fields{sc: &StripeClientMock{
+			client: &StripeClientMock{
 				c: &Charge{},
-			}},
+			},
 			wantErr: false,
 		},
 		{
-			name:    "test2",
-			fields:  fields{sc: &StripeClientMock{err: fmt.Errorf("mock error")}},
+			name: "test2",
+			client: &StripeClientMock{
+				err: fmt.Errorf("mock error"),
+			},
 			wantErr: true,
 		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			a := &App{
-				sc: tt.fields.sc,
+				sc: tt.client,
 			}
 			if err := a.Run(); (err != nil) != tt.wantErr {
 				t.Errorf("App.Run() error = %v, wantErr %v", err, tt.wantErr)
