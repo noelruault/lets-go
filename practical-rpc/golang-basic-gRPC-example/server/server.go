@@ -8,10 +8,10 @@ import (
 	"os/signal"
 	"syscall"
 
+	"github.com/noelruault/programming-training/practical-rpc/golang-basic-gRPC-example/proto"
+	"github.com/noelruault/programming-training/practical-rpc/golang-basic-gRPC-example/service"
+	"github.com/noelruault/programming-training/practical-rpc/golang-basic-gRPC-example/store"
 	"google.golang.org/grpc"
-
-	"github.com/noelruault/practical-rpc/golang-basic-gRPC-example/proto"
-	"github.com/noelruault/practical-rpc/golang-basic-gRPC-example/service"
 )
 
 func main() {
@@ -23,11 +23,12 @@ func main() {
 	if err != nil {
 		fail(err)
 	}
-	fmt.Printf("Listening on %v\n", lis.Addr())
-	svr := grpc.NewServer()
+	fmt.Printf("Listening tcp connections on %v\n", lis.Addr())
 
-	// register our service implementation
-	proto.RegisterStarfriendsServer(svr, &service.StarfriendsImpl{})
+	svr := grpc.NewServer()
+	store := store.NewInMemStore()
+	api := service.NewStarFriendsImpl(store)
+	proto.RegisterStarfriendsServer(svr, api)
 
 	// trap SIGINT / SIGTERM to exit cleanly
 	c := make(chan os.Signal, 1)

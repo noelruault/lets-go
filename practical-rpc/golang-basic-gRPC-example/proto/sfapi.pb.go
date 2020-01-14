@@ -6,13 +6,13 @@ package proto
 import (
 	context "context"
 	fmt "fmt"
-	math "math"
-
 	proto "github.com/golang/protobuf/proto"
+	empty "github.com/golang/protobuf/ptypes/empty"
 	timestamp "github.com/golang/protobuf/ptypes/timestamp"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
+	math "math"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -25,154 +25,6 @@ var _ = math.Inf
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
 const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
-
-type GetFilmRequest struct {
-	Id                   string   `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `json:"-"`
-	XXX_sizecache        int32    `json:"-"`
-}
-
-func (m *GetFilmRequest) Reset()         { *m = GetFilmRequest{} }
-func (m *GetFilmRequest) String() string { return proto.CompactTextString(m) }
-func (*GetFilmRequest) ProtoMessage()    {}
-func (*GetFilmRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_006f8d026c00e08a, []int{0}
-}
-
-func (m *GetFilmRequest) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_GetFilmRequest.Unmarshal(m, b)
-}
-func (m *GetFilmRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_GetFilmRequest.Marshal(b, m, deterministic)
-}
-func (m *GetFilmRequest) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_GetFilmRequest.Merge(m, src)
-}
-func (m *GetFilmRequest) XXX_Size() int {
-	return xxx_messageInfo_GetFilmRequest.Size(m)
-}
-func (m *GetFilmRequest) XXX_DiscardUnknown() {
-	xxx_messageInfo_GetFilmRequest.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_GetFilmRequest proto.InternalMessageInfo
-
-func (m *GetFilmRequest) GetId() string {
-	if m != nil {
-		return m.Id
-	}
-	return ""
-}
-
-type GetFilmResponse struct {
-	Film                 *Film    `protobuf:"bytes,1,opt,name=film,proto3" json:"film,omitempty"`
-	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `json:"-"`
-	XXX_sizecache        int32    `json:"-"`
-}
-
-func (m *GetFilmResponse) Reset()         { *m = GetFilmResponse{} }
-func (m *GetFilmResponse) String() string { return proto.CompactTextString(m) }
-func (*GetFilmResponse) ProtoMessage()    {}
-func (*GetFilmResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_006f8d026c00e08a, []int{1}
-}
-
-func (m *GetFilmResponse) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_GetFilmResponse.Unmarshal(m, b)
-}
-func (m *GetFilmResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_GetFilmResponse.Marshal(b, m, deterministic)
-}
-func (m *GetFilmResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_GetFilmResponse.Merge(m, src)
-}
-func (m *GetFilmResponse) XXX_Size() int {
-	return xxx_messageInfo_GetFilmResponse.Size(m)
-}
-func (m *GetFilmResponse) XXX_DiscardUnknown() {
-	xxx_messageInfo_GetFilmResponse.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_GetFilmResponse proto.InternalMessageInfo
-
-func (m *GetFilmResponse) GetFilm() *Film {
-	if m != nil {
-		return m.Film
-	}
-	return nil
-}
-
-type ListFilmsRequest struct {
-	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `json:"-"`
-	XXX_sizecache        int32    `json:"-"`
-}
-
-func (m *ListFilmsRequest) Reset()         { *m = ListFilmsRequest{} }
-func (m *ListFilmsRequest) String() string { return proto.CompactTextString(m) }
-func (*ListFilmsRequest) ProtoMessage()    {}
-func (*ListFilmsRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_006f8d026c00e08a, []int{2}
-}
-
-func (m *ListFilmsRequest) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_ListFilmsRequest.Unmarshal(m, b)
-}
-func (m *ListFilmsRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_ListFilmsRequest.Marshal(b, m, deterministic)
-}
-func (m *ListFilmsRequest) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_ListFilmsRequest.Merge(m, src)
-}
-func (m *ListFilmsRequest) XXX_Size() int {
-	return xxx_messageInfo_ListFilmsRequest.Size(m)
-}
-func (m *ListFilmsRequest) XXX_DiscardUnknown() {
-	xxx_messageInfo_ListFilmsRequest.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_ListFilmsRequest proto.InternalMessageInfo
-
-type ListFilmsResponse struct {
-	Films                []*Film  `protobuf:"bytes,1,rep,name=films,proto3" json:"films,omitempty"`
-	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `json:"-"`
-	XXX_sizecache        int32    `json:"-"`
-}
-
-func (m *ListFilmsResponse) Reset()         { *m = ListFilmsResponse{} }
-func (m *ListFilmsResponse) String() string { return proto.CompactTextString(m) }
-func (*ListFilmsResponse) ProtoMessage()    {}
-func (*ListFilmsResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_006f8d026c00e08a, []int{3}
-}
-
-func (m *ListFilmsResponse) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_ListFilmsResponse.Unmarshal(m, b)
-}
-func (m *ListFilmsResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_ListFilmsResponse.Marshal(b, m, deterministic)
-}
-func (m *ListFilmsResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_ListFilmsResponse.Merge(m, src)
-}
-func (m *ListFilmsResponse) XXX_Size() int {
-	return xxx_messageInfo_ListFilmsResponse.Size(m)
-}
-func (m *ListFilmsResponse) XXX_DiscardUnknown() {
-	xxx_messageInfo_ListFilmsResponse.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_ListFilmsResponse proto.InternalMessageInfo
-
-func (m *ListFilmsResponse) GetFilms() []*Film {
-	if m != nil {
-		return m.Films
-	}
-	return nil
-}
 
 type Film struct {
 	Id                   string               `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
@@ -189,7 +41,7 @@ func (m *Film) Reset()         { *m = Film{} }
 func (m *Film) String() string { return proto.CompactTextString(m) }
 func (*Film) ProtoMessage()    {}
 func (*Film) Descriptor() ([]byte, []int) {
-	return fileDescriptor_006f8d026c00e08a, []int{4}
+	return fileDescriptor_006f8d026c00e08a, []int{0}
 }
 
 func (m *Film) XXX_Unmarshal(b []byte) error {
@@ -245,37 +97,392 @@ func (m *Film) GetReleaseDate() *timestamp.Timestamp {
 	return nil
 }
 
+type GetFilmRequest struct {
+	Id                   string   `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *GetFilmRequest) Reset()         { *m = GetFilmRequest{} }
+func (m *GetFilmRequest) String() string { return proto.CompactTextString(m) }
+func (*GetFilmRequest) ProtoMessage()    {}
+func (*GetFilmRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_006f8d026c00e08a, []int{1}
+}
+
+func (m *GetFilmRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_GetFilmRequest.Unmarshal(m, b)
+}
+func (m *GetFilmRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_GetFilmRequest.Marshal(b, m, deterministic)
+}
+func (m *GetFilmRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_GetFilmRequest.Merge(m, src)
+}
+func (m *GetFilmRequest) XXX_Size() int {
+	return xxx_messageInfo_GetFilmRequest.Size(m)
+}
+func (m *GetFilmRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_GetFilmRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_GetFilmRequest proto.InternalMessageInfo
+
+func (m *GetFilmRequest) GetId() string {
+	if m != nil {
+		return m.Id
+	}
+	return ""
+}
+
+type GetFilmResponse struct {
+	Film                 *Film    `protobuf:"bytes,1,opt,name=film,proto3" json:"film,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *GetFilmResponse) Reset()         { *m = GetFilmResponse{} }
+func (m *GetFilmResponse) String() string { return proto.CompactTextString(m) }
+func (*GetFilmResponse) ProtoMessage()    {}
+func (*GetFilmResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_006f8d026c00e08a, []int{2}
+}
+
+func (m *GetFilmResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_GetFilmResponse.Unmarshal(m, b)
+}
+func (m *GetFilmResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_GetFilmResponse.Marshal(b, m, deterministic)
+}
+func (m *GetFilmResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_GetFilmResponse.Merge(m, src)
+}
+func (m *GetFilmResponse) XXX_Size() int {
+	return xxx_messageInfo_GetFilmResponse.Size(m)
+}
+func (m *GetFilmResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_GetFilmResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_GetFilmResponse proto.InternalMessageInfo
+
+func (m *GetFilmResponse) GetFilm() *Film {
+	if m != nil {
+		return m.Film
+	}
+	return nil
+}
+
+type ListFilmsRequest struct {
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *ListFilmsRequest) Reset()         { *m = ListFilmsRequest{} }
+func (m *ListFilmsRequest) String() string { return proto.CompactTextString(m) }
+func (*ListFilmsRequest) ProtoMessage()    {}
+func (*ListFilmsRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_006f8d026c00e08a, []int{3}
+}
+
+func (m *ListFilmsRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_ListFilmsRequest.Unmarshal(m, b)
+}
+func (m *ListFilmsRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_ListFilmsRequest.Marshal(b, m, deterministic)
+}
+func (m *ListFilmsRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ListFilmsRequest.Merge(m, src)
+}
+func (m *ListFilmsRequest) XXX_Size() int {
+	return xxx_messageInfo_ListFilmsRequest.Size(m)
+}
+func (m *ListFilmsRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_ListFilmsRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_ListFilmsRequest proto.InternalMessageInfo
+
+type ListFilmsResponse struct {
+	Films                []*Film  `protobuf:"bytes,1,rep,name=films,proto3" json:"films,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *ListFilmsResponse) Reset()         { *m = ListFilmsResponse{} }
+func (m *ListFilmsResponse) String() string { return proto.CompactTextString(m) }
+func (*ListFilmsResponse) ProtoMessage()    {}
+func (*ListFilmsResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_006f8d026c00e08a, []int{4}
+}
+
+func (m *ListFilmsResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_ListFilmsResponse.Unmarshal(m, b)
+}
+func (m *ListFilmsResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_ListFilmsResponse.Marshal(b, m, deterministic)
+}
+func (m *ListFilmsResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ListFilmsResponse.Merge(m, src)
+}
+func (m *ListFilmsResponse) XXX_Size() int {
+	return xxx_messageInfo_ListFilmsResponse.Size(m)
+}
+func (m *ListFilmsResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_ListFilmsResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_ListFilmsResponse proto.InternalMessageInfo
+
+func (m *ListFilmsResponse) GetFilms() []*Film {
+	if m != nil {
+		return m.Films
+	}
+	return nil
+}
+
+type CreateFilmResponse struct {
+	Film                 *Film    `protobuf:"bytes,1,opt,name=film,proto3" json:"film,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *CreateFilmResponse) Reset()         { *m = CreateFilmResponse{} }
+func (m *CreateFilmResponse) String() string { return proto.CompactTextString(m) }
+func (*CreateFilmResponse) ProtoMessage()    {}
+func (*CreateFilmResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_006f8d026c00e08a, []int{5}
+}
+
+func (m *CreateFilmResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CreateFilmResponse.Unmarshal(m, b)
+}
+func (m *CreateFilmResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CreateFilmResponse.Marshal(b, m, deterministic)
+}
+func (m *CreateFilmResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CreateFilmResponse.Merge(m, src)
+}
+func (m *CreateFilmResponse) XXX_Size() int {
+	return xxx_messageInfo_CreateFilmResponse.Size(m)
+}
+func (m *CreateFilmResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_CreateFilmResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CreateFilmResponse proto.InternalMessageInfo
+
+func (m *CreateFilmResponse) GetFilm() *Film {
+	if m != nil {
+		return m.Film
+	}
+	return nil
+}
+
+type CreateFilmRequest struct {
+	Film                 *Film    `protobuf:"bytes,1,opt,name=film,proto3" json:"film,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *CreateFilmRequest) Reset()         { *m = CreateFilmRequest{} }
+func (m *CreateFilmRequest) String() string { return proto.CompactTextString(m) }
+func (*CreateFilmRequest) ProtoMessage()    {}
+func (*CreateFilmRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_006f8d026c00e08a, []int{6}
+}
+
+func (m *CreateFilmRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CreateFilmRequest.Unmarshal(m, b)
+}
+func (m *CreateFilmRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CreateFilmRequest.Marshal(b, m, deterministic)
+}
+func (m *CreateFilmRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CreateFilmRequest.Merge(m, src)
+}
+func (m *CreateFilmRequest) XXX_Size() int {
+	return xxx_messageInfo_CreateFilmRequest.Size(m)
+}
+func (m *CreateFilmRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_CreateFilmRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CreateFilmRequest proto.InternalMessageInfo
+
+func (m *CreateFilmRequest) GetFilm() *Film {
+	if m != nil {
+		return m.Film
+	}
+	return nil
+}
+
+type DeleteFilmRequest struct {
+	Id                   string   `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *DeleteFilmRequest) Reset()         { *m = DeleteFilmRequest{} }
+func (m *DeleteFilmRequest) String() string { return proto.CompactTextString(m) }
+func (*DeleteFilmRequest) ProtoMessage()    {}
+func (*DeleteFilmRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_006f8d026c00e08a, []int{7}
+}
+
+func (m *DeleteFilmRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_DeleteFilmRequest.Unmarshal(m, b)
+}
+func (m *DeleteFilmRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_DeleteFilmRequest.Marshal(b, m, deterministic)
+}
+func (m *DeleteFilmRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_DeleteFilmRequest.Merge(m, src)
+}
+func (m *DeleteFilmRequest) XXX_Size() int {
+	return xxx_messageInfo_DeleteFilmRequest.Size(m)
+}
+func (m *DeleteFilmRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_DeleteFilmRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_DeleteFilmRequest proto.InternalMessageInfo
+
+func (m *DeleteFilmRequest) GetId() string {
+	if m != nil {
+		return m.Id
+	}
+	return ""
+}
+
+type UpdateFilmRequest struct {
+	Film                 *Film    `protobuf:"bytes,1,opt,name=film,proto3" json:"film,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *UpdateFilmRequest) Reset()         { *m = UpdateFilmRequest{} }
+func (m *UpdateFilmRequest) String() string { return proto.CompactTextString(m) }
+func (*UpdateFilmRequest) ProtoMessage()    {}
+func (*UpdateFilmRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_006f8d026c00e08a, []int{8}
+}
+
+func (m *UpdateFilmRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_UpdateFilmRequest.Unmarshal(m, b)
+}
+func (m *UpdateFilmRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_UpdateFilmRequest.Marshal(b, m, deterministic)
+}
+func (m *UpdateFilmRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_UpdateFilmRequest.Merge(m, src)
+}
+func (m *UpdateFilmRequest) XXX_Size() int {
+	return xxx_messageInfo_UpdateFilmRequest.Size(m)
+}
+func (m *UpdateFilmRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_UpdateFilmRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_UpdateFilmRequest proto.InternalMessageInfo
+
+func (m *UpdateFilmRequest) GetFilm() *Film {
+	if m != nil {
+		return m.Film
+	}
+	return nil
+}
+
+type UpdateFilmResponse struct {
+	Film                 *Film    `protobuf:"bytes,1,opt,name=film,proto3" json:"film,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *UpdateFilmResponse) Reset()         { *m = UpdateFilmResponse{} }
+func (m *UpdateFilmResponse) String() string { return proto.CompactTextString(m) }
+func (*UpdateFilmResponse) ProtoMessage()    {}
+func (*UpdateFilmResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_006f8d026c00e08a, []int{9}
+}
+
+func (m *UpdateFilmResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_UpdateFilmResponse.Unmarshal(m, b)
+}
+func (m *UpdateFilmResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_UpdateFilmResponse.Marshal(b, m, deterministic)
+}
+func (m *UpdateFilmResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_UpdateFilmResponse.Merge(m, src)
+}
+func (m *UpdateFilmResponse) XXX_Size() int {
+	return xxx_messageInfo_UpdateFilmResponse.Size(m)
+}
+func (m *UpdateFilmResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_UpdateFilmResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_UpdateFilmResponse proto.InternalMessageInfo
+
+func (m *UpdateFilmResponse) GetFilm() *Film {
+	if m != nil {
+		return m.Film
+	}
+	return nil
+}
+
 func init() {
+	proto.RegisterType((*Film)(nil), "Film")
 	proto.RegisterType((*GetFilmRequest)(nil), "GetFilmRequest")
 	proto.RegisterType((*GetFilmResponse)(nil), "GetFilmResponse")
 	proto.RegisterType((*ListFilmsRequest)(nil), "ListFilmsRequest")
 	proto.RegisterType((*ListFilmsResponse)(nil), "ListFilmsResponse")
-	proto.RegisterType((*Film)(nil), "Film")
+	proto.RegisterType((*CreateFilmResponse)(nil), "CreateFilmResponse")
+	proto.RegisterType((*CreateFilmRequest)(nil), "CreateFilmRequest")
+	proto.RegisterType((*DeleteFilmRequest)(nil), "DeleteFilmRequest")
+	proto.RegisterType((*UpdateFilmRequest)(nil), "UpdateFilmRequest")
+	proto.RegisterType((*UpdateFilmResponse)(nil), "UpdateFilmResponse")
 }
 
 func init() { proto.RegisterFile("proto/sfapi.proto", fileDescriptor_006f8d026c00e08a) }
 
 var fileDescriptor_006f8d026c00e08a = []byte{
-	// 296 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x64, 0x90, 0xbd, 0x4e, 0xc3, 0x30,
-	0x10, 0xc7, 0x95, 0xb6, 0xa1, 0xf4, 0x8a, 0xfa, 0x61, 0x31, 0x98, 0x30, 0x10, 0x65, 0x62, 0xa8,
-	0x1c, 0x14, 0x66, 0x16, 0x84, 0x60, 0x61, 0x0a, 0x4c, 0x2c, 0xc8, 0xd4, 0x97, 0xca, 0x52, 0x52,
-	0x07, 0xdb, 0x79, 0x22, 0x5e, 0x14, 0xc5, 0x4e, 0x02, 0x84, 0xc9, 0xfe, 0x7f, 0xf8, 0x74, 0xfe,
-	0xc1, 0xb6, 0xd6, 0xca, 0xaa, 0xd4, 0x14, 0xbc, 0x96, 0xcc, 0xdd, 0xa3, 0xab, 0x83, 0x52, 0x87,
-	0x12, 0x53, 0xa7, 0x3e, 0x9a, 0x22, 0xb5, 0xb2, 0x42, 0x63, 0x79, 0x55, 0xfb, 0x42, 0x12, 0xc3,
-	0xea, 0x09, 0xed, 0xa3, 0x2c, 0xab, 0x1c, 0x3f, 0x1b, 0x34, 0x96, 0xac, 0x60, 0x22, 0x05, 0x0d,
-	0xe2, 0xe0, 0x7a, 0x91, 0x4f, 0xa4, 0x48, 0x76, 0xb0, 0x1e, 0x1a, 0xa6, 0x56, 0x47, 0x83, 0xe4,
-	0x02, 0x66, 0x85, 0x2c, 0x2b, 0x57, 0x5a, 0x66, 0x21, 0x73, 0xa1, 0xb3, 0x12, 0x02, 0x9b, 0x67,
-	0x69, 0x5c, 0xdd, 0x74, 0x13, 0x93, 0x1b, 0xd8, 0xfe, 0xf2, 0xba, 0x19, 0x97, 0x10, 0xb6, 0x0f,
-	0x0c, 0x0d, 0xe2, 0xe9, 0xcf, 0x10, 0xef, 0x25, 0x5f, 0x01, 0xcc, 0x5a, 0x3d, 0x5e, 0x86, 0x9c,
-	0x43, 0x68, 0xa5, 0x2d, 0x91, 0x4e, 0x9c, 0xe5, 0x05, 0x89, 0xe0, 0x54, 0x48, 0x8d, 0x7b, 0xab,
-	0x34, 0x9d, 0xba, 0x60, 0xd0, 0x6d, 0x56, 0x6b, 0x25, 0x9a, 0x3d, 0x6a, 0x3a, 0xf3, 0x59, 0xaf,
-	0xc9, 0x1d, 0x9c, 0x69, 0x2c, 0x91, 0x1b, 0x7c, 0x17, 0xdc, 0x22, 0x0d, 0xdd, 0x7f, 0x22, 0xe6,
-	0xa1, 0xb1, 0x1e, 0x1a, 0x7b, 0xed, 0xa1, 0xe5, 0xcb, 0xae, 0xff, 0xc0, 0x2d, 0x66, 0x0a, 0x96,
-	0x2f, 0x96, 0xeb, 0x42, 0x4b, 0x3c, 0x0a, 0x43, 0x76, 0x30, 0xef, 0x40, 0x91, 0x35, 0xfb, 0x0b,
-	0x35, 0xda, 0xb0, 0x31, 0xc3, 0x0c, 0x16, 0x03, 0x14, 0xb2, 0x65, 0x63, 0x68, 0x11, 0x61, 0xff,
-	0x98, 0xdd, 0xcf, 0xdf, 0x42, 0xbf, 0xd3, 0x89, 0x3b, 0x6e, 0xbf, 0x03, 0x00, 0x00, 0xff, 0xff,
-	0xc7, 0x6e, 0x62, 0xf2, 0xf2, 0x01, 0x00, 0x00,
+	// 405 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x8c, 0x93, 0xc1, 0x6e, 0xd3, 0x40,
+	0x10, 0x86, 0x65, 0x37, 0xa6, 0x74, 0x8c, 0xda, 0x7a, 0x8a, 0x90, 0xd9, 0x1e, 0xb0, 0xcc, 0xa5,
+	0x87, 0x6a, 0x8c, 0x8c, 0x2a, 0x71, 0xe1, 0x02, 0x05, 0x2e, 0x9c, 0x02, 0x5c, 0xb8, 0x20, 0x13,
+	0x8f, 0xa3, 0x95, 0xec, 0xd8, 0xec, 0x6e, 0x0e, 0x3c, 0x09, 0x0f, 0xc0, 0x8b, 0x22, 0xaf, 0x9d,
+	0x38, 0xb1, 0x23, 0x9a, 0x53, 0x32, 0xf3, 0xff, 0x3b, 0xfe, 0xe7, 0x5b, 0x1b, 0x82, 0x46, 0xd5,
+	0xa6, 0x4e, 0x74, 0x91, 0x35, 0x92, 0xec, 0x7f, 0xf1, 0x62, 0x59, 0xd7, 0xcb, 0x92, 0x13, 0x5b,
+	0xfd, 0x5c, 0x17, 0x89, 0x91, 0x15, 0x6b, 0x93, 0x55, 0x4d, 0x6f, 0xb8, 0x1e, 0x1b, 0xb8, 0x6a,
+	0xcc, 0xef, 0x4e, 0x8c, 0xff, 0x3a, 0x30, 0xfb, 0x28, 0xcb, 0x0a, 0xcf, 0xc1, 0x95, 0x79, 0xe8,
+	0x44, 0xce, 0xcd, 0xd9, 0xdc, 0x95, 0x39, 0x3e, 0x05, 0xcf, 0x48, 0x53, 0x72, 0xe8, 0xda, 0x56,
+	0x57, 0xa0, 0x80, 0xc7, 0xb9, 0x54, 0xbc, 0x30, 0xb5, 0x0a, 0x4f, 0xac, 0xb0, 0xad, 0x5b, 0xad,
+	0x51, 0x75, 0xbe, 0x5e, 0xb0, 0x0a, 0x67, 0x9d, 0xb6, 0xa9, 0xf1, 0x2d, 0x3c, 0x51, 0x5c, 0x72,
+	0xa6, 0xf9, 0x47, 0x9e, 0x19, 0x0e, 0xbd, 0xc8, 0xb9, 0xf1, 0x53, 0x41, 0x5d, 0x34, 0xda, 0x44,
+	0xa3, 0xaf, 0x9b, 0xec, 0x73, 0xbf, 0xf7, 0xdf, 0x67, 0x86, 0xe3, 0x08, 0xce, 0x3f, 0xb1, 0x69,
+	0x73, 0xce, 0xf9, 0xd7, 0x9a, 0xb5, 0x19, 0xc7, 0x8d, 0x6f, 0xe1, 0x62, 0xeb, 0xd0, 0x4d, 0xbd,
+	0xd2, 0x8c, 0xcf, 0x61, 0x56, 0xc8, 0xb2, 0xb2, 0x26, 0x3f, 0xf5, 0xc8, 0x8a, 0xb6, 0x15, 0x23,
+	0x5c, 0x7e, 0x96, 0xda, 0xda, 0x75, 0x3f, 0x31, 0x7e, 0x05, 0xc1, 0x4e, 0xaf, 0x9f, 0x71, 0x0d,
+	0x5e, 0x7b, 0x40, 0x87, 0x4e, 0x74, 0x32, 0x0c, 0xe9, 0x7a, 0x71, 0x02, 0xf8, 0x5e, 0x71, 0x66,
+	0xf8, 0xd8, 0xc7, 0x12, 0x04, 0xbb, 0x07, 0xba, 0x4d, 0xfe, 0xe3, 0x7f, 0x09, 0xc1, 0x3d, 0x97,
+	0xbc, 0xef, 0x1f, 0x6f, 0x4e, 0x10, 0x7c, 0x6b, 0xf2, 0xe3, 0x87, 0x26, 0x80, 0xbb, 0xfe, 0x07,
+	0x53, 0xa7, 0x7f, 0x5c, 0xf0, 0xbf, 0x98, 0x4c, 0x15, 0x4a, 0xf2, 0x2a, 0xd7, 0x78, 0x0b, 0xa7,
+	0x3d, 0x6a, 0xbc, 0xa0, 0xfd, 0x6b, 0x11, 0x97, 0x34, 0xbe, 0x85, 0x14, 0xce, 0xb6, 0x58, 0x31,
+	0xa0, 0x31, 0x76, 0x81, 0x34, 0xa5, 0x7e, 0x07, 0x30, 0x70, 0x42, 0xa4, 0x09, 0x34, 0x71, 0x45,
+	0x07, 0xc8, 0xdf, 0x01, 0x0c, 0x9b, 0x21, 0xd2, 0x04, 0x8b, 0xb8, 0xa2, 0x03, 0xab, 0xbf, 0x01,
+	0x18, 0x28, 0x23, 0xd2, 0x04, 0xb9, 0x78, 0x36, 0x79, 0x4f, 0x3f, 0xb4, 0x9f, 0xd0, 0xbb, 0xd3,
+	0xef, 0x5e, 0xd7, 0x79, 0x64, 0x7f, 0x5e, 0xff, 0x0b, 0x00, 0x00, 0xff, 0xff, 0x09, 0xbf, 0x12,
+	0xd4, 0x9f, 0x03, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -294,6 +501,9 @@ type StarfriendsClient interface {
 	GetFilm(ctx context.Context, in *GetFilmRequest, opts ...grpc.CallOption) (*GetFilmResponse, error)
 	// Get a list of all Films
 	ListFilms(ctx context.Context, in *ListFilmsRequest, opts ...grpc.CallOption) (*ListFilmsResponse, error)
+	CreateFilm(ctx context.Context, in *CreateFilmRequest, opts ...grpc.CallOption) (*CreateFilmResponse, error)
+	UpdateFilm(ctx context.Context, in *UpdateFilmRequest, opts ...grpc.CallOption) (*UpdateFilmResponse, error)
+	DeleteFilm(ctx context.Context, in *DeleteFilmRequest, opts ...grpc.CallOption) (*empty.Empty, error)
 }
 
 type starfriendsClient struct {
@@ -322,12 +532,42 @@ func (c *starfriendsClient) ListFilms(ctx context.Context, in *ListFilmsRequest,
 	return out, nil
 }
 
+func (c *starfriendsClient) CreateFilm(ctx context.Context, in *CreateFilmRequest, opts ...grpc.CallOption) (*CreateFilmResponse, error) {
+	out := new(CreateFilmResponse)
+	err := c.cc.Invoke(ctx, "/Starfriends/CreateFilm", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *starfriendsClient) UpdateFilm(ctx context.Context, in *UpdateFilmRequest, opts ...grpc.CallOption) (*UpdateFilmResponse, error) {
+	out := new(UpdateFilmResponse)
+	err := c.cc.Invoke(ctx, "/Starfriends/UpdateFilm", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *starfriendsClient) DeleteFilm(ctx context.Context, in *DeleteFilmRequest, opts ...grpc.CallOption) (*empty.Empty, error) {
+	out := new(empty.Empty)
+	err := c.cc.Invoke(ctx, "/Starfriends/DeleteFilm", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // StarfriendsServer is the server API for Starfriends service.
 type StarfriendsServer interface {
 	// Get a single Film by unique ID
 	GetFilm(context.Context, *GetFilmRequest) (*GetFilmResponse, error)
 	// Get a list of all Films
 	ListFilms(context.Context, *ListFilmsRequest) (*ListFilmsResponse, error)
+	CreateFilm(context.Context, *CreateFilmRequest) (*CreateFilmResponse, error)
+	UpdateFilm(context.Context, *UpdateFilmRequest) (*UpdateFilmResponse, error)
+	DeleteFilm(context.Context, *DeleteFilmRequest) (*empty.Empty, error)
 }
 
 // UnimplementedStarfriendsServer can be embedded to have forward compatible implementations.
@@ -339,6 +579,15 @@ func (*UnimplementedStarfriendsServer) GetFilm(ctx context.Context, req *GetFilm
 }
 func (*UnimplementedStarfriendsServer) ListFilms(ctx context.Context, req *ListFilmsRequest) (*ListFilmsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListFilms not implemented")
+}
+func (*UnimplementedStarfriendsServer) CreateFilm(ctx context.Context, req *CreateFilmRequest) (*CreateFilmResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateFilm not implemented")
+}
+func (*UnimplementedStarfriendsServer) UpdateFilm(ctx context.Context, req *UpdateFilmRequest) (*UpdateFilmResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateFilm not implemented")
+}
+func (*UnimplementedStarfriendsServer) DeleteFilm(ctx context.Context, req *DeleteFilmRequest) (*empty.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteFilm not implemented")
 }
 
 func RegisterStarfriendsServer(s *grpc.Server, srv StarfriendsServer) {
@@ -381,6 +630,60 @@ func _Starfriends_ListFilms_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Starfriends_CreateFilm_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateFilmRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(StarfriendsServer).CreateFilm(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/Starfriends/CreateFilm",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(StarfriendsServer).CreateFilm(ctx, req.(*CreateFilmRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Starfriends_UpdateFilm_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateFilmRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(StarfriendsServer).UpdateFilm(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/Starfriends/UpdateFilm",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(StarfriendsServer).UpdateFilm(ctx, req.(*UpdateFilmRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Starfriends_DeleteFilm_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteFilmRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(StarfriendsServer).DeleteFilm(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/Starfriends/DeleteFilm",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(StarfriendsServer).DeleteFilm(ctx, req.(*DeleteFilmRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var _Starfriends_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "Starfriends",
 	HandlerType: (*StarfriendsServer)(nil),
@@ -392,6 +695,18 @@ var _Starfriends_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListFilms",
 			Handler:    _Starfriends_ListFilms_Handler,
+		},
+		{
+			MethodName: "CreateFilm",
+			Handler:    _Starfriends_CreateFilm_Handler,
+		},
+		{
+			MethodName: "UpdateFilm",
+			Handler:    _Starfriends_UpdateFilm_Handler,
+		},
+		{
+			MethodName: "DeleteFilm",
+			Handler:    _Starfriends_DeleteFilm_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
